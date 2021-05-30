@@ -1,0 +1,13 @@
+.LeftPanel {
+  flex: 1;
+  cursor: pointer;
+  padding: 0 20px;
+}
+.LeftPanelChip {
+  padding: 5px 20px;
+  margin: 10px 0;
+  border: 2px solid #306674;
+}
+.LeftPanelChip div:first-child {
+  font-weight: bolder;
+}

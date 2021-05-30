@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import styles from "./Main.module.css";
 import axios from "axios";
 import LeftPanel from "../leftPanel/LeftPanel";
+import RightPanel from "../rightPanel/RightPanel";
 function Main() {
   const clientId = "5d24460f9f9641db9f8007653484bb12";
   const clientSecret = "ada53ce19ccd4aa8b4635e943d63daf6";
@@ -29,8 +31,12 @@ function Main() {
   }, []);
   console.log(playlists);
   return (
-    <div>
-      <LeftPanel playlists={playlists} />
+    <div className={styles.main}>
+      <div className={styles.header}>Playlists</div>
+      <div className={styles.panels}>
+        <LeftPanel playlists={playlists} />
+        <RightPanel />
+      </div>
     </div>
   );
 }
