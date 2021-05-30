@@ -6,7 +6,10 @@ import RightPanel from "../rightPanel/RightPanel";
 function Main() {
   const clientId = "5d24460f9f9641db9f8007653484bb12";
   const clientSecret = "ada53ce19ccd4aa8b4635e943d63daf6";
+
   const [playlists, setPlayLists] = useState([]);
+  const [dragInfo, setDragInfo] = useState();
+  const [rightPanelPlaylists, setRightPanelPlaylists] = useState([]);
 
   useEffect(() => {
     axios("https://accounts.spotify.com/api/token", {
@@ -29,13 +32,34 @@ function Main() {
       });
     });
   }, []);
-  console.log(playlists);
+
+  const handleDragStart = (dragInfo) => {
+    setDragInfo(dragInfo);
+  };
+
+  const onDrop = (draggedToId) => {
+    const { playlist, id: draggedFromId } = dragInfo;
+    if (draggedToId === draggedFromId) {
+      return;
+    }
+    if (
+      rightPanelPlaylists.find(
+        (rightPanelPlaylist) => rightPanelPlaylist.id === playlist.id
+      )
+    ) {
+      return;
+    }
+    setRightPanelPlaylists((prev) => [...prev, playlist]);
+  };
+
+  console.log(rightPanelPlaylists);
+
   return (
     <div className={styles.main}>
       <div className={styles.header}>Playlists</div>
       <div className={styles.panels}>
-        <LeftPanel playlists={playlists} />
-        <RightPanel />
+        <LeftPanel playlists={playlists} handleDragStart={handleDragStart} />
+        <RightPanel onDrop={onDrop} rightPanelPlaylists={rightPanelPlaylists} />
       </div>
     </div>
   );
