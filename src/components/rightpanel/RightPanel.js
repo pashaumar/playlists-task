@@ -14,6 +14,7 @@ function RightPanel({ onDrop, rightPanelPlaylists }) {
       <RightPanelChip playlist={rightPanelPlaylist} key={index + 1} />
     ));
   };
+
   return (
     <div
       className={styles.rightPanel}

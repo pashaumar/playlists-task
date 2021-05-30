@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./LeftPanel.module.css";
 
 function LeftPanelChip({ playlist, handleDragStart, id }) {
-  console.log(id);
-
   return (
     <div
       className={styles.LeftPanelChip}
